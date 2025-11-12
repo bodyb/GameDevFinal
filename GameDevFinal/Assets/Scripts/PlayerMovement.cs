@@ -1,6 +1,7 @@
 using TreeEditor;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerMovemnt : MonoBehaviour
 {
@@ -19,37 +20,53 @@ public class PlayerMovemnt : MonoBehaviour
     public Rigidbody rb;
     public float jumpHeight = 10;
     public bool isGround = false;
+    public bool sprinting = false;
     public float groundDistance = 1.001f;
+    public float inAirSpeed = 2.5f;
+    public float offset = 1f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        mouseX = Input.GetAxis("Mouse X") * turnSpeed * Time.deltaTime;
+        mouseY = Input.GetAxis("Mouse Y") * turnSpeedY * Time.deltaTime;
         forwardInput = Input.GetAxis("Vertical");
         HorizontalInput = Input.GetAxis("Horizontal");
 
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            sprinting = true;
+            speed = 15.0f;
+        } else
+        {
+            sprinting = false;
+            speed = 10.0f;
+        }
+
         if (isGround)
         {
-            rb.AddForce(transform.forward * forwardInput * speed);
-            rb.AddForce(transform.right * HorizontalInput * speed);
+            transform.Translate(Vector3.forward * forwardInput * speed * Time.deltaTime);
+            transform.Translate(Vector3.right * HorizontalInput * speed * Time.deltaTime);
         }
         if (!isGround)
         {
-            rb.AddForce(transform.forward * forwardInput * speed * inAirSpeed);
-            rb.AddForce(transform.right * HorizontalInput * speed);
+            transform.Translate(Vector3.forward * forwardInput * inAirSpeed * Time.deltaTime);
+            transform.Translate(Vector3.right * HorizontalInput * inAirSpeed * Time.deltaTime);
         }
         //transform.Translate(Vector3.forward * forwardInput * Time.deltaTime * speed);
         //transform.Translate(Vector3.right * HorizontalInput * Time.deltaTime * speed);
         //transform.Rotate(Vector3.up * mouseX * Time.deltaTime * turnSpeed);
         //cameraObj.transform.Rotate(Vector3.up * mouseY * Time.deltaTime * turnSpeedY);
 
-        yRotation += Mathf.Clamp(-mouseY * turnSpeedY, -maxY, maxY);
-        xRotation += mouseX * turnSpeed;
+        yRotation -= mouseY;
+        yRotation = Mathf.Clamp(yRotation, -maxY, maxY);
+        xRotation += mouseX;
         cameraObj.transform.rotation = Quaternion.Euler(yRotation, xRotation + 90, 0f);
         transform.rotation = Quaternion.Euler(0f, xRotation + 90, 0f);
 
@@ -57,23 +74,13 @@ public class PlayerMovemnt : MonoBehaviour
         {
             rb.AddForce(transform.up * jumpHeight);
             isGround = false;
-            
         }
+        
+    }
 
-
-
-        /*
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, groundDistance))
-        {
-            if (hit.collider.CompareTag("Ground"))
-            {
-                Debug.Log("hit ground");
-                isGround = true;
-            }
-        }*/
-        mouseX = Input.GetAxis("Mouse X");
-        mouseY = Input.GetAxis("Mouse Y");
+    private void LateUpdate()
+    {
+        cameraObj.transform.position = new Vector3(transform.position.x, transform.position.y + offset, transform.position.z);
     }
 
     private void OnCollisionEnter(Collision collision)
