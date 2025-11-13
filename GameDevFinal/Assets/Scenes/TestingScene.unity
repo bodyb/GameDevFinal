@@ -156,11 +156,11 @@ MonoBehaviour:
   HorizontalInput: 0
   forwardInput: 0
   speed: 10
-  turnSpeed: 100
+  turnSpeed: 600
   xBound: 10
   mouseX: 0
   mouseY: 0
-  turnSpeedY: 100
+  turnSpeedY: 400
   yRotation: 0
   xRotation: 0
   maxY: 60
