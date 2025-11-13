@@ -8,7 +8,7 @@ public class PlayerMovemnt : MonoBehaviour
     public float HorizontalInput;
     public float forwardInput;
     public float speed = 10.0f;
-    public float turnSpeed = 10.0f;
+    public float turnSpeed = 3.0f;
     public float xBound = 10.0f;
     public float mouseX = 0;
     public float mouseY = 0;
@@ -19,7 +19,7 @@ public class PlayerMovemnt : MonoBehaviour
     public GameObject cameraObj;
     public Rigidbody rb;
     public float jumpHeight = 10;
-    public bool isGround = false;
+    public bool isGround = true;
     public bool sprinting = false;
     public float groundDistance = 1.001f;
     public float inAirSpeed = 2.5f;
@@ -32,7 +32,7 @@ public class PlayerMovemnt : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         mouseX = Input.GetAxis("Mouse X") * turnSpeed * Time.deltaTime;
         mouseY = Input.GetAxis("Mouse Y") * turnSpeedY * Time.deltaTime;
