@@ -24,11 +24,13 @@ public class PlayerMovemnt : MonoBehaviour
     public float groundDistance = 1.001f;
     public float inAirSpeed = 2.5f;
     public float offset = 1f;
+    public GameObject feet;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -75,7 +77,14 @@ public class PlayerMovemnt : MonoBehaviour
             rb.AddForce(transform.up * jumpHeight);
             isGround = false;
         }
-        
+
+        RaycastHit hit;
+        Physics.Raycast(feet.transform.position, Vector3.down, out hit, 0.1f);
+        if (hit.collider.CompareTag("Ground"))
+        {
+            isGround = true;
+        }
+
     }
 
     private void LateUpdate()
@@ -87,7 +96,7 @@ public class PlayerMovemnt : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            isGround = true;
+            //isGround = true;
         }
     }
 }
