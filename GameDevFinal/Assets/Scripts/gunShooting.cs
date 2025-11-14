@@ -28,8 +28,8 @@ public class gunShooting : MonoBehaviour
             {
                 hit.rigidbody.AddForce(ray.direction * 500);
                 currentGun.currentAmmo--;
-                Quaternion rotation = Quaternion.Euler(Vector3)
-                Instantiate(bulletPrefab, hit.transform, );
+                Quaternion rotation = Quaternion.Euler(hit.normal);
+                Instantiate(bulletPrefab, hit.transform.position, rotation);
             }
         }
     }
