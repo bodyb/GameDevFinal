@@ -19,6 +19,7 @@ public class PlayerMovemnt : MonoBehaviour
     public GameObject cameraObj;
     public Rigidbody rb;
     public GameObject feet;
+    public GameObject gunHolder;
     public float jumpHeight = 10;
     public bool isGround = true;
     public bool sprinting = false;
@@ -70,6 +71,7 @@ public class PlayerMovemnt : MonoBehaviour
         yRotation = Mathf.Clamp(yRotation, -maxY, maxY);
         xRotation += mouseX;
         cameraObj.transform.rotation = Quaternion.Euler(yRotation, xRotation + 90, 0f);
+        gunHolder.transform.rotation = Quaternion.Euler(yRotation, xRotation + 90, 0f);
         transform.rotation = Quaternion.Euler(0f, xRotation + 90, 0f);
 
         if (Input.GetKeyDown(KeyCode.Space) && isGround)
