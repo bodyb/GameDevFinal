@@ -3,34 +3,40 @@ using UnityEngine.UI;
 
 public class HealthBarSc : MonoBehaviour
 {
-    public Slider health;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+   
+    public Slider healthSlider;       
+
+ 
+    public float maxHealth = 100f;
+    public float currentHealth;
+
     void Start()
     {
-        //damagePlayer(0.5f);
+      
+        currentHealth = maxHealth;
+
+      
+        healthSlider.minValue = 0f;
+        healthSlider.maxValue = 1f;
+
+        UpdateHealthUI();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (health.value < 0)
-        {
-            health.value = 0;
-        }
-        if (health.value > 1)
-        {
-            health.value = 1;
-        }
 
+    public void DamagePlayer(float damage)
+    {
+        currentHealth = Mathf.Clamp(currentHealth - damage, 0f, maxHealth);
+        UpdateHealthUI();
     }
 
-    public void damagePlayer(float damage)
+    public void HealPlayer(float healAmount)
     {
-        health.value = health.value - damage;
+        currentHealth = Mathf.Clamp(currentHealth + healAmount, 0f, maxHealth);
+        UpdateHealthUI();
     }
 
-    public void healPlayer(float heal)
+    private void UpdateHealthUI()
     {
-        health.value = heal + health.value;
+        healthSlider.value = currentHealth / maxHealth;
     }
 }
