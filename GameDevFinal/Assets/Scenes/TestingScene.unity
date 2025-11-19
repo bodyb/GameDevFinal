@@ -323,7 +323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b8ca5af16701ac43863cdcbc49ace9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::gunShooting
-  bulletImpactPrefab: {fileID: 0}
+  bulletImpactPrefab: {fileID: 8904963326503646871, guid: ac148ec417514e346a41e8d314b2143c, type: 3}
 --- !u!1 &63668865
 GameObject:
   m_ObjectHideFlags: 0
