@@ -6,7 +6,7 @@ using UnityEngine.Rendering;
 public class gunShooting : MonoBehaviour
 {
     public gun currentGun;
-    public GameObject bulletPrefab;
+    public GameObject bulletImpactPrefab;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -29,7 +29,7 @@ public class gunShooting : MonoBehaviour
                 hit.rigidbody.AddForce(ray.direction * 500);
                 currentGun.currentAmmo--;
                 Quaternion rotation = Quaternion.Euler(hit.normal);
-                Instantiate(bulletPrefab, hit.transform.position, rotation);
+                Instantiate(bulletImpactPrefab, hit.transform.position, rotation);
             }
         }
     }

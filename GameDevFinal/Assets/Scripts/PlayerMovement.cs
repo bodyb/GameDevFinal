@@ -18,6 +18,7 @@ public class PlayerMovemnt : MonoBehaviour
     public float maxY = 60;
     public GameObject cameraObj;
     public Rigidbody rb;
+    public GameObject feet;
     public float jumpHeight = 10;
     public bool isGround = true;
     public bool sprinting = false;
@@ -29,6 +30,7 @@ public class PlayerMovemnt : MonoBehaviour
     void Start()
     {
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -75,19 +77,18 @@ public class PlayerMovemnt : MonoBehaviour
             rb.AddForce(transform.up * jumpHeight);
             isGround = false;
         }
+
+        RaycastHit hit;
+        Physics.Raycast(feet.transform.position, Vector3.down, out hit, 0.01f);
+        if (hit.collider.CompareTag("Ground"))
+        {
+            isGround = true;
+        }
         
     }
 
     private void LateUpdate()
     {
         cameraObj.transform.position = new Vector3(transform.position.x, transform.position.y + offset, transform.position.z);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGround = true;
-        }
     }
 }
