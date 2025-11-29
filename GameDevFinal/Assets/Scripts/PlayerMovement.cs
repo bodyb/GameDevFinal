@@ -81,8 +81,8 @@ public class PlayerMovemnt : MonoBehaviour
         }
 
         RaycastHit hit;
-        Physics.Raycast(feet.transform.position, Vector3.down, out hit, 0.01f);
-        if (hit.collider.CompareTag("Ground"))
+        Physics.Raycast(feet.transform.position, Vector3.down, out hit, groundDistance);
+        if (hit.collider != null && hit.collider.CompareTag("Ground"))
         {
             isGround = true;
         }

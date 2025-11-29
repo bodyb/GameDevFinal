@@ -373,10 +373,11 @@ MonoBehaviour:
   cameraObj: {fileID: 2773084604419132838}
   rb: {fileID: 5724531442305930179}
   feet: {fileID: 111683779041323629}
+  gunHolder: {fileID: 1306477397905156815}
   jumpHeight: 300
   isGround: 1
   sprinting: 0
-  groundDistance: 1.00001
+  groundDistance: 0.01
   inAirSpeed: 7.5
   offset: 1
 --- !u!114 &7055280676971011728

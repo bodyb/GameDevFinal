@@ -23,13 +23,18 @@ public class gunShooting : MonoBehaviour
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Physics.Raycast(ray, out hit, currentGun.distance);
-            //Debug.Log(hit);
+            Debug.Log(currentGun.currentAmmo);
+            currentGun.currentAmmo--;
             if (hit.rigidbody != null && currentGun.currentAmmo > 0)
             {
-                hit.rigidbody.AddForce(ray.direction * 500);
-                currentGun.currentAmmo--;
-                Quaternion rotation = Quaternion.Euler(hit.normal);
-                Instantiate(bulletImpactPrefab, hit.transform.position, rotation);
+                //hit.rigidbody.AddForce(ray.direction * 500);
+                //Quaternion rotation = Quaternion.Euler(hit.normal);
+                //Instantiate(bulletImpactPrefab, hit.transform.position, rotation);
+                if (hit.rigidbody.gameObject.GetComponent<isZombie>() != null)
+                {
+                    hit.rigidbody.gameObject.GetComponent<isZombie>().health = hit.rigidbody.gameObject.GetComponent<isZombie>().health - currentGun.damage;
+                }
+
             }
         }
     }
