@@ -9,6 +9,7 @@ public class SpawnManager : MonoBehaviour
     public int spawnPerWave = 10;
     public GameObject zombiePrefab;
     public int currentZombies;
+    public bool waveDone = false; 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,11 +19,17 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentZombies <= 0)
+        if (GameObject.Find("zombie(Clone)") == null)
         {
-            if (waveNumber <= 0)
+            waveDone = true;
+        }
+        if (waveDone)
+        {
+            waveNumber--;
+            if (waveNumber >= 0)
             {
-            startRound();
+                startRound();
+                waveDone = false;
             }
         }
     }

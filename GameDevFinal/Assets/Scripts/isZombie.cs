@@ -17,11 +17,11 @@ public class isZombie : MonoBehaviour
     {
         agent.SetDestination(player.transform.position);
         //transform.rotation = player.transform.rotation.;
-        if (health < 0)
+        if (health <= 0)
         {
             Destroy(this.gameObject);
         }
-        Debug.Log(health);
+        //Debug.Log(health);
 
     }
 }

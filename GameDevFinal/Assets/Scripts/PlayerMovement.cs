@@ -1,5 +1,6 @@
 using TreeEditor;
 using Unity.VisualScripting;
+using UnityEditor.U2D;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -41,6 +42,7 @@ public class PlayerMovemnt : MonoBehaviour
         mouseY = Input.GetAxis("Mouse Y") * turnSpeedY * Time.deltaTime;
         forwardInput = Input.GetAxis("Vertical");
         HorizontalInput = Input.GetAxis("Horizontal");
+        Vector3 moveDirection = (transform.right * HorizontalInput + transform.forward * forwardInput).normalized;
 
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
@@ -54,6 +56,7 @@ public class PlayerMovemnt : MonoBehaviour
 
         if (isGround)
         {
+            //rb.MovePosition(rb.position + moveDirection * speed * Time.deltaTime);
             transform.Translate(Vector3.forward * forwardInput * speed * Time.deltaTime);
             transform.Translate(Vector3.right * HorizontalInput * speed * Time.deltaTime);
         }

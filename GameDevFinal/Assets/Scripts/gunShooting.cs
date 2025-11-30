@@ -7,35 +7,40 @@ public class gunShooting : MonoBehaviour
 {
     public gun currentGun;
     public GameObject bulletImpactPrefab;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public GameObject bullet;
+    public GameObject gunHolder;
+    public Camera camera;
+    //Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        currentGun = new gun(10, 10, 0.5f);
+        currentGun = new gun(50, 1500, 1f);
     }
 
-    // Update is called once per frame
+    //Update is called once per frame
     void Update()
     {
-
-        
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Physics.Raycast(ray, out hit, currentGun.distance);
-            Debug.Log(currentGun.currentAmmo);
-            currentGun.currentAmmo--;
-            if (hit.rigidbody != null && currentGun.currentAmmo > 0)
+            Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+            Physics.Raycast(ray, out hit, currentGun.distance, LayerMask.GetMask("Zombie"), QueryTriggerInteraction.Collide);
+            Debug.DrawLine(ray.origin, hit.point, Color.red, 0.2f);
+
+            if (hit.collider != null && currentGun.currentAmmo > 0)
             {
-                //hit.rigidbody.AddForce(ray.direction * 500);
-                //Quaternion rotation = Quaternion.Euler(hit.normal);
-                //Instantiate(bulletImpactPrefab, hit.transform.position, rotation);
-                if (hit.rigidbody.gameObject.GetComponent<isZombie>() != null)
+                isZombie zombie = hit.collider.GetComponentInParent<isZombie>();
+                if (zombie != null)
                 {
-                    hit.rigidbody.gameObject.GetComponent<isZombie>().health = hit.rigidbody.gameObject.GetComponent<isZombie>().health - currentGun.damage;
+                    zombie.health -= currentGun.damage;
+                    Debug.Log("Zombie Hit");
                 }
 
+                if (zombie == null)
+                {
+                    Debug.Log("Zombie collider does not have isZombie in its parents! " + hit.collider.name);
+                }
             }
+            currentGun.currentAmmo--;
         }
     }
 }
