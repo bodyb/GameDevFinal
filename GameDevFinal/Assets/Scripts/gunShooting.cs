@@ -22,22 +22,24 @@ public class gunShooting : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
-            Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-            Physics.Raycast(ray, out hit, currentGun.distance, LayerMask.GetMask("Zombie"), QueryTriggerInteraction.Collide);
-            Debug.DrawLine(ray.origin, hit.point, Color.red, 0.2f);
-
-            if (hit.collider != null && currentGun.currentAmmo > 0)
+            Quaternion shootingAngle = new Quaternion(camera.transform.rotation.x, transform.rotation.y, transform.rotation.z, 0f);
+            //Ray ray = Camera.main.ScreenPointToRay(new Vector3(0.5f, 0.5f, 0f));
+            Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, currentGun.distance, ~0); //LayerMask.GetMask("Zombie")
+            Debug.DrawLine(camera.transform.position, camera.transform.forward * currentGun.distance, Color.red, 0.2f);
+            Debug.Log(hit.collider.name);
+            if (currentGun.currentAmmo > 0)
             {
                 isZombie zombie = hit.collider.GetComponentInParent<isZombie>();
                 if (zombie != null)
                 {
                     zombie.health -= currentGun.damage;
                     Debug.Log("Zombie Hit");
+                    //Instantiate()
                 }
 
                 if (zombie == null)
                 {
-                    Debug.Log("Zombie collider does not have isZombie in its parents! " + hit.collider.name);
+                    Debug.Log(hit.collider.name);
                 }
             }
             currentGun.currentAmmo--;
