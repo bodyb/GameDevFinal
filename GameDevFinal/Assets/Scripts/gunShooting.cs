@@ -22,11 +22,11 @@ public class gunShooting : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
-            Quaternion shootingAngle = new Quaternion(camera.transform.rotation.x, transform.rotation.y, transform.rotation.z, 0f);
-            //Ray ray = Camera.main.ScreenPointToRay(new Vector3(0.5f, 0.5f, 0f));
-            Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, currentGun.distance, ~0); //LayerMask.GetMask("Zombie")
-            Debug.DrawLine(camera.transform.position, camera.transform.forward * currentGun.distance, Color.red, 0.2f);
-            Debug.Log(hit.collider.name);
+            Vector3 shootingPos = new Vector3(camera.transform.position.x, camera.transform.position.y - 0.4f, camera.transform.position.z);
+            
+            Physics.Raycast(shootingPos, camera.transform.forward, out hit, currentGun.distance, ~0); //LayerMask.GetMask("Zombie")
+            Debug.DrawLine(shootingPos, camera.transform.forward * currentGun.distance, Color.red, 0.2f);
+            //Debug.Log(hit.collider.name);
             if (currentGun.currentAmmo > 0)
             {
                 isZombie zombie = hit.collider.GetComponentInParent<isZombie>();
@@ -39,7 +39,7 @@ public class gunShooting : MonoBehaviour
 
                 if (zombie == null)
                 {
-                    Debug.Log(hit.collider.name);
+                    //Debug.Log(hit.collider.name);
                 }
             }
             currentGun.currentAmmo--;

@@ -7,7 +7,7 @@ public class HealthBarSc : MonoBehaviour
     public Slider healthSlider;       
 
  
-    public float maxHealth = 100f;
+    public float maxHealth = 1f;
     public float currentHealth;
 
     void Start()
