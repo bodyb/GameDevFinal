@@ -241,7 +241,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &512787516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,7 +257,7 @@ MonoBehaviour:
   spawnPoints:
   - {fileID: 1936860391}
   - {fileID: 1276806608}
-  waveNumber: 5
+  waveNumber: 100
   spawnCount: 0
   spawnPerWave: 10
   zombiePrefab: {fileID: 826413346681449587, guid: 2c51a0807c2000b44bf4cd2a51d0c079, type: 3}
@@ -374,7 +374,7 @@ RectTransform:
   m_Children:
   - {fileID: 1403236029}
   - {fileID: 366935255}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1584618183}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1806,6 +1806,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 737613560}
   - {fileID: 1535323872}
   - {fileID: 1392924599}
   m_Father: {fileID: 0}
@@ -2185,7 +2186,6 @@ SceneRoots:
   - {fileID: 941194474}
   - {fileID: 1901925521}
   - {fileID: 1166149733}
-  - {fileID: 737613560}
   - {fileID: 1915582896}
   - {fileID: 512787517}
   - {fileID: 1936860392}

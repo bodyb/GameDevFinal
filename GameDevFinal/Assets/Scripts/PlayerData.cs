@@ -19,14 +19,12 @@ public class PlayerData : MonoBehaviour
         
     }
     
-    private void OnTrigger(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-
         if (other.GetComponentInParent<isZombie>())
         {
             healthBar.DamagePlayer(other.GetComponentInParent<isZombie>().damage);
             playerHealth = healthBar.currentHealth;
-            Debug.Log("hit ahhhhhhhhhhh");
         }
 
     }
