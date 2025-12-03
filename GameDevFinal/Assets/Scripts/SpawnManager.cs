@@ -1,4 +1,6 @@
 using NUnit.Framework;
+using System.Xml;
+using TMPro;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
@@ -9,7 +11,8 @@ public class SpawnManager : MonoBehaviour
     public int spawnPerWave = 10;
     public GameObject zombiePrefab;
     public int currentZombies;
-    public bool waveDone = false; 
+    public bool waveDone = false;
+    public GameObject winScreen;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,6 +34,10 @@ public class SpawnManager : MonoBehaviour
                 startRound();
                 waveDone = false;
             }
+        }
+        if (waveDone && waveNumber < 0)
+        {
+            winScreen.SetActive(true);
         }
     }
 

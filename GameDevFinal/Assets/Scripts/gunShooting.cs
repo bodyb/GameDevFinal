@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -7,20 +8,23 @@ public class gunShooting : MonoBehaviour
 {
     public gun currentGun;
     public GameObject bulletImpactPrefab;
+    public GameObject grendaePrefab;
     public GameObject bullet;
     public GameObject gunHolder;
     public Camera camera;
+    public TMP_Text ammoUI;
     //Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        currentGun = new gun(50, 18, 1f, 3, 6);
+        currentGun = new gun(50, 150, 1f, 3, 30);
     }
 
     //Update is called once per frame
     void Update()
     {
-        Debug.Log(currentGun.currentTotalAmmo, camera);
-        Debug.Log(currentGun.currentAmmo, bullet);
+        ammoUI.text = currentGun.currentAmmo.ToString() + "/" + currentGun.currentTotalAmmo.ToString();
+        //Debug.Log(currentGun.currentTotalAmmo, camera);
+        //Debug.Log(currentGun.currentAmmo, bullet);
         if (Input.GetKeyDown(KeyCode.R))
         {
             if (currentGun.currentTotalAmmo > currentGun.bulletPerMag)
@@ -32,7 +36,7 @@ public class gunShooting : MonoBehaviour
                 if (currentGun.currentAmmo < currentGun.bulletPerMag)
                 {
                     currentGun.currentAmmo = currentGun.bulletPerMag;
-                    currentGun.currentTotalAmmo -= currentGun.bulletPerMag;
+                    //currentGun.currentTotalAmmo -= currentGun.bulletPerMag;
                 }
             }
             else
@@ -68,6 +72,11 @@ public class gunShooting : MonoBehaviour
                 currentGun.currentTotalAmmo--;
             }
             
+        }
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            Instantiate(grendaePrefab, camera.transform.position, camera.transform.rotation);
         }
     }
 }
