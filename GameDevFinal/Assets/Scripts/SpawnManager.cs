@@ -7,9 +7,8 @@ public class SpawnManager : MonoBehaviour
 {
     public GameObject[] spawnPoints;
     public int waveNumber = 5;
-    public int spawnCount;
     public int spawnPerWave = 10;
-    public GameObject zombiePrefab;
+    public GameObject[] zombiePrefab;
     public int currentZombies;
     public bool waveDone = false;
     public GameObject winScreen;
@@ -17,12 +16,21 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         startRound();
+        winScreen.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GameObject.Find("zombie(Clone)") == null)
+        if (GameObject.Find("Little_Ghost_ZOMbi (1)(Clone)") == null 
+            && GameObject.Find("Little_Ghost_ZOMbi (2)(Clone)") == null 
+            && GameObject.Find("Little_Ghost_ZOMbi (3)(Clone)") == null 
+            && GameObject.Find("Little_Ghost_ZOMbi (4)(Clone)") == null
+            && GameObject.Find("Little_Ghost_ZOMbi (5)(Clone)") == null
+            && GameObject.Find("Little_Ghost_ZOMbi (6)(Clone)") == null
+            && GameObject.Find("Little_Ghost_ZOMbi (7)(Clone)") == null
+            && GameObject.Find("Little_Ghost_ZOMbi (8)(Clone)") == null
+            && GameObject.Find("Little_Ghost_ZOMbi (9)(Clone)") == null)
         {
             waveDone = true;
         }
@@ -47,7 +55,8 @@ public class SpawnManager : MonoBehaviour
         for (int i = 0; i < spawnPerWave; i++)
         {
             int ranSpawn = Random.Range(0, spawnPoints.Length);
-            Instantiate(zombiePrefab, spawnPoints[ranSpawn].transform.position, spawnPoints[ranSpawn].transform.rotation);
+            int ranZombie = Random.Range(0, zombiePrefab.Length);
+            Instantiate(zombiePrefab[ranZombie], spawnPoints[ranSpawn].transform.position, spawnPoints[ranSpawn].transform.rotation);
         }
     }
 }

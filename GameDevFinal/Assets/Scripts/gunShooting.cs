@@ -55,12 +55,11 @@ public class gunShooting : MonoBehaviour
             
             if (currentGun.currentAmmo > 0)
             {
-                Debug.Log(hit.collider.name);
                 isZombie zombie = hit.collider.GetComponentInParent<isZombie>();
                 if (zombie != null)
                 {
                     zombie.health -= currentGun.damage;
-                    Debug.Log("Zombie Hit");
+                    //Debug.Log("Zombie Hit");
                     //Instantiate()
                 }
 

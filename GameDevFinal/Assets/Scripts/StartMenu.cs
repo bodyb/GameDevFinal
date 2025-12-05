@@ -33,7 +33,7 @@ public class StartMenu : MonoBehaviour
         Debug.Log("Button Clicked" + buttinNum);
         if (buttinNum == 1)
         {
-            SceneManager.LoadScene("Level1", LoadSceneMode.Single);
+            SceneManager.LoadScene("TestingTry2", LoadSceneMode.Single);
         }
         if (buttinNum == 2)
         {
