@@ -75,12 +75,7 @@ public class PlayerMovemnt : MonoBehaviour
             //transform.Rotate(Vector3.up * mouseX * Time.deltaTime * turnSpeed);
             //cameraObj.transform.Rotate(Vector3.up * mouseY * Time.deltaTime * turnSpeedY);
 
-            yRotation -= mouseY;
-            yRotation = Mathf.Clamp(yRotation, -maxY, maxY);
-            xRotation += mouseX;
-            cameraObj.transform.rotation = Quaternion.Euler(yRotation, xRotation + 90, 0f);
-            gunHolder.transform.rotation = Quaternion.Euler(yRotation, xRotation + 90, 0f);
-            transform.rotation = Quaternion.Euler(0f, xRotation + 90, 0f);
+            
 
             if (Input.GetKeyDown(KeyCode.Space) && isGround)
             {
@@ -100,5 +95,11 @@ public class PlayerMovemnt : MonoBehaviour
     private void LateUpdate()
     {
         cameraObj.transform.position = new Vector3(transform.position.x, transform.position.y + offset, transform.position.z);
+        yRotation -= mouseY;
+        yRotation = Mathf.Clamp(yRotation, -maxY, maxY);
+        xRotation += mouseX;
+        cameraObj.transform.rotation = Quaternion.Euler(yRotation, xRotation + 90, 0f);
+        gunHolder.transform.rotation = Quaternion.Euler(yRotation, xRotation + 90, 0f);
+        transform.rotation = Quaternion.Euler(0f, xRotation + 90, 0f);
     }
 }

@@ -20,7 +20,7 @@ public class gunShooting : MonoBehaviour
     }
 
     //Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         ammoUI.text = currentGun.currentAmmo.ToString() + "/" + currentGun.currentTotalAmmo.ToString();
         //Debug.Log(currentGun.currentTotalAmmo, camera);
