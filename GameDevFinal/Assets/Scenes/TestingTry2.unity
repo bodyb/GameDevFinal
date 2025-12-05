@@ -1496,6 +1496,7 @@ MonoBehaviour:
   groundDistance: 0.1
   inAirSpeed: 7.5
   offset: 1
+  playerData: {fileID: 1392924594}
 --- !u!136 &1392924596
 CapsuleCollider:
   m_ObjectHideFlags: 0

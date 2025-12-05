@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using NUnit.Framework;
 using System.Xml;
 using TMPro;
@@ -12,6 +13,11 @@ public class SpawnManager : MonoBehaviour
     public int currentZombies;
     public bool waveDone = false;
     public GameObject winScreen;
+    public float countDown;
+    public float elaspedTime;
+    public bool preWave = true;
+    public GameObject countTextScreen;
+    public TMP_Text countText;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -22,6 +28,20 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (preWave)
+        {
+            countTextScreen.SetActive(true);
+            elaspedTime += Time.deltaTime;
+            countDown = Mathf.RoundToInt(5 - elaspedTime);
+            countText.text = countDown.ToString();
+            //Debug.Log(countDown);
+        }
+        if (countDown == 0)
+        {
+            countTextScreen.SetActive(false);
+            preWave = false;
+        }
+
         if (GameObject.Find("Little_Ghost_ZOMbi (1)(Clone)") == null 
             && GameObject.Find("Little_Ghost_ZOMbi (2)(Clone)") == null 
             && GameObject.Find("Little_Ghost_ZOMbi (3)(Clone)") == null 

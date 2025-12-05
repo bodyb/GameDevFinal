@@ -27,10 +27,12 @@ public class PlayerMovemnt : MonoBehaviour
     public float groundDistance = 1.001f;
     public float inAirSpeed = 2.5f;
     public float offset = 1f;
+    public PlayerData playerData;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -38,58 +40,61 @@ public class PlayerMovemnt : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        mouseX = Input.GetAxis("Mouse X") * turnSpeed * Time.deltaTime;
-        mouseY = Input.GetAxis("Mouse Y") * turnSpeedY * Time.deltaTime;
-        forwardInput = Input.GetAxis("Vertical");
-        HorizontalInput = Input.GetAxis("Horizontal");
-        Vector3 moveDirection = (transform.right * HorizontalInput + transform.forward * forwardInput).normalized;
+        if (playerData.alive)
+        {
+            mouseX = Input.GetAxis("Mouse X") * turnSpeed * Time.deltaTime;
+            mouseY = Input.GetAxis("Mouse Y") * turnSpeedY * Time.deltaTime;
+            forwardInput = Input.GetAxis("Vertical");
+            HorizontalInput = Input.GetAxis("Horizontal");
+            Vector3 moveDirection = (transform.right * HorizontalInput + transform.forward * forwardInput).normalized;
 
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            sprinting = true;
-            speed = 15.0f;
-        } else
-        {
-            sprinting = false;
-            speed = 10.0f;
-        }
+            if (Input.GetKeyDown(KeyCode.LeftControl))
+            {
+                sprinting = true;
+                speed = 15.0f;
+            }
+            else
+            {
+                sprinting = false;
+                speed = 10.0f;
+            }
 
-        if (isGround)
-        {
-            //rb.MovePosition(rb.position + moveDirection * speed * Time.deltaTime);
-            transform.Translate(Vector3.forward * forwardInput * speed * Time.deltaTime);
-            transform.Translate(Vector3.right * HorizontalInput * speed * Time.deltaTime);
-        }
-        if (!isGround)
-        {
-            transform.Translate(Vector3.forward * forwardInput * inAirSpeed * Time.deltaTime);
-            transform.Translate(Vector3.right * HorizontalInput * inAirSpeed * Time.deltaTime);
-        }
-        //transform.Translate(Vector3.forward * forwardInput * Time.deltaTime * speed);
-        //transform.Translate(Vector3.right * HorizontalInput * Time.deltaTime * speed);
-        //transform.Rotate(Vector3.up * mouseX * Time.deltaTime * turnSpeed);
-        //cameraObj.transform.Rotate(Vector3.up * mouseY * Time.deltaTime * turnSpeedY);
+            if (isGround)
+            {
+                //rb.MovePosition(rb.position + moveDirection * speed * Time.deltaTime);
+                transform.Translate(Vector3.forward * forwardInput * speed * Time.deltaTime);
+                transform.Translate(Vector3.right * HorizontalInput * speed * Time.deltaTime);
+            }
+            if (!isGround)
+            {
+                transform.Translate(Vector3.forward * forwardInput * inAirSpeed * Time.deltaTime);
+                transform.Translate(Vector3.right * HorizontalInput * inAirSpeed * Time.deltaTime);
+            }
+            //transform.Translate(Vector3.forward * forwardInput * Time.deltaTime * speed);
+            //transform.Translate(Vector3.right * HorizontalInput * Time.deltaTime * speed);
+            //transform.Rotate(Vector3.up * mouseX * Time.deltaTime * turnSpeed);
+            //cameraObj.transform.Rotate(Vector3.up * mouseY * Time.deltaTime * turnSpeedY);
 
-        yRotation -= mouseY;
-        yRotation = Mathf.Clamp(yRotation, -maxY, maxY);
-        xRotation += mouseX;
-        cameraObj.transform.rotation = Quaternion.Euler(yRotation, xRotation + 90, 0f);
-        gunHolder.transform.rotation = Quaternion.Euler(yRotation, xRotation + 90, 0f);
-        transform.rotation = Quaternion.Euler(0f, xRotation + 90, 0f);
+            yRotation -= mouseY;
+            yRotation = Mathf.Clamp(yRotation, -maxY, maxY);
+            xRotation += mouseX;
+            cameraObj.transform.rotation = Quaternion.Euler(yRotation, xRotation + 90, 0f);
+            gunHolder.transform.rotation = Quaternion.Euler(yRotation, xRotation + 90, 0f);
+            transform.rotation = Quaternion.Euler(0f, xRotation + 90, 0f);
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGround)
-        {
-            rb.AddForce(transform.up * jumpHeight);
-            isGround = false;
-        }
+            if (Input.GetKeyDown(KeyCode.Space) && isGround)
+            {
+                rb.AddForce(transform.up * jumpHeight);
+                isGround = false;
+            }
 
-        RaycastHit hit;
-        Physics.Raycast(feet.transform.position, Vector3.down, out hit, groundDistance);
-        if (hit.collider != null && hit.collider.CompareTag("Ground"))
-        {
-            isGround = true;
+            RaycastHit hit;
+            Physics.Raycast(feet.transform.position, Vector3.down, out hit, groundDistance);
+            if (hit.collider != null && hit.collider.CompareTag("Ground"))
+            {
+                isGround = true;
+            }
         }
-        
     }
 
     private void LateUpdate()
