@@ -32,7 +32,7 @@ public class grenadeExplode : MonoBehaviour
             gameObject.AddComponent<SphereCollider>();
             gameObject.GetComponent<SphereCollider>().radius = Mathf.Lerp(0.1649289f, 10, 20);
             gameObject.GetComponent<SphereCollider>().isTrigger = true;
-            Destroy(gameObject, 0.5f);
+            Destroy(gameObject, 0.2f);
         }
 
         if (other.GetComponentInParent<isZombie>() != null)

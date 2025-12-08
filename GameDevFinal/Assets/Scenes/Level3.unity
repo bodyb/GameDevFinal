@@ -4509,7 +4509,7 @@ MonoBehaviour:
   - {fileID: 1513145548}
   - {fileID: 1533685066}
   - {fileID: 721080752}
-  waveNumber: 6
+  waveNumber: 5
   spawnPerWave: 10
   zombiePrefab:
   - {fileID: 6423403879286395854, guid: 68a45b7c7de96f84bb3192731ba3a68c, type: 3}
