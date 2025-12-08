@@ -31,15 +31,15 @@ public class StartMenu : MonoBehaviour
     void ButtonClicked(int buttinNum)
     {
         Debug.Log("Button Clicked" + buttinNum);
-        if (buttinNum == 1)
+        if (buttinNum == 3)
         {
-            SceneManager.LoadScene("TestingTry2", LoadSceneMode.Single);
+            SceneManager.LoadScene("Level1", LoadSceneMode.Single);
         }
         if (buttinNum == 2)
         {
             SceneManager.LoadScene("Level2", LoadSceneMode.Single);
         }
-        if (buttinNum == 3)
+        if (buttinNum == 1)
         {
             SceneManager.LoadScene("Level3", LoadSceneMode.Single);
         }
