@@ -106,7 +106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   speed: 10
   Grounded: 0
-  explosionEffect: {fileID: 0}
+  explosionEffect: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454, type: 3}
 --- !u!54 &1362623217929659370
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -149,7 +149,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

@@ -11,8 +11,10 @@ public class gunShooting : MonoBehaviour
     public GameObject grendaePrefab;
     public GameObject bullet;
     public GameObject gunHolder;
+    public int grenadeAmmo = 5;
     public Camera camera;
     public TMP_Text ammoUI;
+    public TMP_Text grenadeUI;
     //Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -72,10 +74,11 @@ public class gunShooting : MonoBehaviour
             }
             
         }
-
-        if (Input.GetKeyDown(KeyCode.G))
+        grenadeUI.text = grenadeAmmo.ToString() + " Grenades";
+        if (Input.GetKeyDown(KeyCode.G) && grenadeAmmo > 0)
         {
-            Instantiate(grendaePrefab, camera.transform.position, camera.transform.rotation);
+            Instantiate(grendaePrefab, (camera.transform.position + camera.transform.forward), camera.transform.rotation);
+            grenadeAmmo--;
         }
     }
 }
