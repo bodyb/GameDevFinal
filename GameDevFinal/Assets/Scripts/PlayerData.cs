@@ -18,6 +18,7 @@ public class PlayerData : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        playerHealth = healthBar.currentHealth;
         if (playerHealth == 0)
         {
             deadScreen.SetActive(true);
