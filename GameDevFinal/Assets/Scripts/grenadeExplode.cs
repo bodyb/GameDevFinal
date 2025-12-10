@@ -6,13 +6,14 @@ public class grenadeExplode : MonoBehaviour
 {
     public float speed = 10f;
     public bool Grounded = false;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    public GameObject explosionEffect; 
+
     void Start()
     {
-        
+
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!Grounded)
@@ -26,10 +27,12 @@ public class grenadeExplode : MonoBehaviour
         if (other.CompareTag("Ground"))
         {
             Grounded = true;
+            Instantiate(explosionEffect, transform.position, Quaternion.identity);
+
             gameObject.AddComponent<SphereCollider>();
             gameObject.GetComponent<SphereCollider>().radius = Mathf.Lerp(0.1649289f, 10, 20);
             gameObject.GetComponent<SphereCollider>().isTrigger = true;
-            Destroy(gameObject, 0.5f);
+            Destroy(gameObject, 0.2f);
         }
 
         if (other.GetComponentInParent<isZombie>() != null)

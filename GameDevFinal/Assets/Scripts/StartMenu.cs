@@ -31,7 +31,7 @@ public class StartMenu : MonoBehaviour
     void ButtonClicked(int buttinNum)
     {
         Debug.Log("Button Clicked" + buttinNum);
-        if (buttinNum == 1)
+        if (buttinNum == 3)
         {
             SceneManager.LoadScene("Level1", LoadSceneMode.Single);
         }
@@ -39,7 +39,7 @@ public class StartMenu : MonoBehaviour
         {
             SceneManager.LoadScene("Level2", LoadSceneMode.Single);
         }
-        if (buttinNum == 3)
+        if (buttinNum == 1)
         {
             SceneManager.LoadScene("Level3", LoadSceneMode.Single);
         }
