@@ -15,10 +15,13 @@ public class gunShooting : MonoBehaviour
     public Camera camera;
     public TMP_Text ammoUI;
     public TMP_Text grenadeUI;
+    public AudioSource gunshotNoise;
+    public AudioClip gunshotnoiseclip;
     //Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         currentGun = new gun(50, 150, 1f, 3, 30);
+        gunshotNoise = GetComponent<AudioSource>();
     }
 
     //Update is called once per frame
@@ -55,6 +58,8 @@ public class gunShooting : MonoBehaviour
             Physics.Raycast(shootingPos, camera.transform.forward, out hit, currentGun.distance, ~0); //LayerMask.GetMask("Zombie")
             Debug.DrawLine(shootingPos, camera.transform.forward * currentGun.distance, Color.red, 0.2f);
             
+            
+
             if (currentGun.currentAmmo > 0)
             {
                 isZombie zombie = hit.collider.GetComponentInParent<isZombie>();
@@ -69,9 +74,11 @@ public class gunShooting : MonoBehaviour
                 {
                     //Debug.Log(hit.collider.name);
                 }
+                gunshotNoise.Play();
                 currentGun.currentAmmo--;
                 currentGun.currentTotalAmmo--;
             }
+            
             
         }
         grenadeUI.text = grenadeAmmo.ToString() + " Grenades";
